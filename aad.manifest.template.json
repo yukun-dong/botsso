@@ -1,7 +1,7 @@
 {
     "id": "${{AAD_APP_OBJECT_ID}}",
     "appId": "${{AAD_APP_CLIENT_ID}}",
-    "name": "tab112802-aad",
+    "name": "bot112804-aad",
     "accessTokenAcceptedVersion": 2,
     "signInAudience": "AzureADMyOrg",
     "optionalClaims": {
@@ -90,20 +90,12 @@
         }
     ],
     "identifierUris": [
-        "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
+        "api://botid-${{BOT_ID}}"
     ],
     "replyUrlsWithType": [
         {
-            "url": "${{TAB_ENDPOINT}}/auth-end.html",
+            "url": "https://${{BOT_DOMAIN}}/auth-end.html",
             "type": "Web"
-        },
-        {
-            "url": "${{TAB_ENDPOINT}}/auth-end.html?clientId=${{AAD_APP_CLIENT_ID}}",
-            "type": "Spa"
-        },
-        {
-            "url": "${{TAB_ENDPOINT}}/blank-auth-end.html",
-            "type": "Spa"
         }
     ]
 }

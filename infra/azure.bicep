@@ -18,6 +18,12 @@ param botDisplayName string
 param serverfarmsName string = resourceBaseName
 param webAppName string = resourceBaseName
 param location string = resourceGroup().location
+param m365ClientId string
+param m365TenantId string
+param m365OauthAuthorityHost string
+param m365ApplicationIdUri string = 'api://botid-${botAadAppClientId}'
+@secure()
+param m365ClientSecret string
 
 // Compute resources for your Web App
 resource serverfarm 'Microsoft.Web/serverfarms@2021-02-01' = {
@@ -63,6 +69,19 @@ resource webApp 'Microsoft.Web/sites@2021-02-01' = {
       ]
       ftpsState: 'FtpsOnly'
     }
+  }
+}
+
+resource webAppSettings 'Microsoft.Web/sites/config@2021-02-01' = {
+  name: '${webAppName}/appsettings'
+  properties: {
+      M365_CLIENT_ID: m365ClientId
+      M365_CLIENT_SECRET: m365ClientSecret
+      M365_TENANT_ID: m365TenantId
+      M365_AUTHORITY_HOST: m365OauthAuthorityHost
+      BOT_ID: botAadAppClientId
+      BOT_PASSWORD: botAadAppClientSecret
+      RUNNING_ON_AZURE: '1'
   }
 }
 
